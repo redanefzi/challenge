@@ -13,6 +13,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// to store a new Product
+Route::post('products', 'App\Http\Controllers\ProductController@store'); 
+
+// to list products
+Route::get('products', 'App\Http\Controllers\ProductController@index');
+
+// to list Categories
+Route::get('categories', 'App\Http\Controllers\CategoryController@index');
+
+//Route::resource('categories', 'CategoryController');
+
