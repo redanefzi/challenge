@@ -4,9 +4,26 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use App\Repositories\CategoryRepository;
 
 class CategoryController extends Controller
 {
+
+    /**
+     * @var CategoryRepository
+     */
+    private $categoryrepository;
+
+    /**
+     * @param CategoryRepository $categoryrepository
+     * @return void
+     */
+    public function __construct(CategoryRepository $categoryrepository)
+    {
+        $this->categoryrepository = $categoryrepository;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -14,11 +31,13 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //fetch all categories
-        $data = Category::all();
+
+
+        // get all categories from the repository
+        $categories = $this->categoryrepository->all();
 
         // return JSON formated data
-        return response()->json($data);
+        return response()->json($categories);
     }
 
     /**
